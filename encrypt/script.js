@@ -3,14 +3,13 @@ const underline = document.getElementsByClassName("input")[0];
 const enter = document.getElementsByClassName("enter")[0];
 const enterText = document.getElementsByClassName("enterText")[0];
 const result = document.getElementsByClassName("result")[0];
-const resultTitle = document.getElementsByClassName("resultTitle")[0];
-const resultText = document.getElementsByClassName("resultText")[0];
 
 enterText.textContent = "Enter";
 
 input.addEventListener("input", () => {
     if (input.value != "") {
         underline.classList.add("focused");
+        enterText.innerHTML = "Enter";
     } else {
         underline.classList.remove("focused");
     }
@@ -82,14 +81,13 @@ function encryption(input) {
         encoded += temp.slice(temp.length - 4, temp.length);
     }
 
-    resultTitle.innerHTML = "Success <i class='fa-solid fa-check'></i>";
-    resultText.textContent = encoded;
+    enterText.innerHTML = "Success <i class='fa-solid fa-check'></i>";
+    result.textContent = encoded;
 
     encryptionEnd();
 }
 function encryptionStart() {
-    resultTitle.innerHTML = "";
-    resultText.textContent = "";
+    result.textContent = "";
     input.disabled = true;
     input.style.color = "#666";
     underline.classList.add("disableUnderline");
@@ -104,12 +102,11 @@ function encryptionEnd() {
     underline.classList.remove("disableUnderline");
     enter.classList.remove("processing");
     enter.classList.remove("loading");
-    enterText.textContent = "Enter";
 }
 
 function error(reason) {
-    resultTitle.innerHTML = "Erorr <i class='fa-solid fa-xmark'></i>";
-    resultText.textContent = reason;
+    enterText.innerHTML = "Erorr <i class='fa-solid fa-xmark'></i>";
+    result.textContent = reason;
     encryptionEnd();
 }
 

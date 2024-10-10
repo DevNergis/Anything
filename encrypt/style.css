@@ -144,14 +144,6 @@ input::placeholder {
     max-width: 500px;
     transition: 0.3s;
     text-align: center;
-}
-
-.resultTitle {
-    font-size: 16px;
-    font-weight: 600;
-}
-
-.resultText {
     font-size: 14px;
     margin-top: 10px;
     word-break: break-all;
