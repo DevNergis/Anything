@@ -119,7 +119,10 @@ function clickTheButton() {
         error("Input is Empty");
         return;
     }
-    encryption(input.value);
+    setTimeout(() => {
+        //열심히 프로세싱 만든거 자랑하기용
+        encryption(input.value);
+    }, 1000);
 }
 
 enter.addEventListener("click", () => {
