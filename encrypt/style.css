@@ -1,0 +1,158 @@
+body {
+    background: #222;
+    color: #efefef;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    width: min-content;
+}
+
+.focused {
+    &::before {
+        width: 100% !important;
+    }
+}
+
+.input {
+    width: max-content;
+    position: relative;
+
+    & > input {
+        box-sizing: border-box;
+        width: 250px;
+        padding: 15px 10px;
+        border: none;
+        background: #222;
+        font-size: 15px;
+        color: #efefef;
+        outline: none;
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        width: 0;
+        background: #365aff;
+        transition: 0.3s;
+    }
+}
+
+input::placeholder {
+    color: #444;
+    font-size: 15px;
+}
+
+.enter {
+    height: 45px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 15px 10px;
+    text-align: center;
+    border: none;
+    outline: none;
+    background-color: #333;
+    border-radius: 5px;
+    width: 250px;
+    color: #efefef;
+    font-weight: 600;
+    transition: 0.2s;
+    font-size: 13px;
+}
+
+.enterText {
+    display: block;
+    transform: translateX(20px);
+    transition: 0.3s;
+}
+
+.enter:hover {
+    background-color: #444;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.enter:active {
+    background-color: #111;
+}
+
+.enterLoading {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50em;
+    box-sizing: border-box;
+    border: 2px solid transparent;
+    margin-top: 15px;
+    margin-left: 20px;
+    animation: spinCircle 0.8s infinite;
+    transition: 0.5s;
+}
+
+.processing {
+    color: #666;
+    background-color: #111;
+    cursor: wait;
+}
+
+.processing:hover {
+    background-color: #111;
+    box-shadow: none;
+}
+
+.disableUnderline::before {
+    background: #333 !important;
+}
+
+.loading {
+    position: relative;
+
+    & > .enterText {
+        transform: translateX(0);
+    }
+
+    & > .enterLoading {
+        border-top-color: #666;
+        border-left-color: #666;
+        margin-left: 6px;
+    }
+}
+
+@keyframes spinCircle {
+    from {
+        transform: scale(1.5) translate(-50%, -50%) rotate(0);
+    }
+    to {
+        transform: scale(1.5) translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.result {
+    margin-top: 20px;
+    max-width: 500px;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.resultTitle {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.resultText {
+    font-size: 14px;
+    margin-top: 10px;
+    word-break: break-all;
+}
