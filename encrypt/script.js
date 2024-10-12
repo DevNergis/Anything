@@ -79,6 +79,7 @@ function encryption(input) {
             temp += encryptString[j];
         }
         encoded += temp.slice(temp.length - 4, temp.length);
+        // encoded += temp;
     }
 
     enterText.innerHTML = "Success <i class='fa-solid fa-check'></i>";
@@ -86,6 +87,7 @@ function encryption(input) {
 
     encryptionEnd();
 }
+
 function encryptionStart() {
     result.textContent = "";
     input.disabled = true;
@@ -102,6 +104,7 @@ function encryptionEnd() {
     underline.classList.remove("disableUnderline");
     enter.classList.remove("processing");
     enter.classList.remove("loading");
+    input.focus();
 }
 
 function error(reason) {
