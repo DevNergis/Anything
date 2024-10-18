@@ -148,3 +148,11 @@ input::placeholder {
     margin-top: 10px;
     word-break: break-all;
 }
+
+.noti {
+    position: absolute;
+    bottom: 40px;
+    text-align: center;
+    font-size: 14px;
+    color: white;
+}
