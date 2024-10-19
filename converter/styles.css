@@ -1,0 +1,67 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #111;
+    color: #eee;
+}
+
+.container {
+    height: auto;
+    text-align: center;
+    background: #222;
+    border: 1px solid #333;
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+input[type="file"] {
+    margin: 1rem 0;
+}
+
+button {
+    margin-top: 10px;
+    transition: 0.1s;
+    background-color: #365aff;
+    color: #eee;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+
+    &:disabled {
+        cursor: no-drop;
+        color: #555;
+        background-color: #333;
+    }
+
+    &:enabled {
+        cursor: pointer;
+
+        &:hover {
+            background-color: #5171ff;
+        }
+    }
+}
+
+a {
+    display: block;
+    margin-top: 1rem;
+    font-size: 14px;
+    color: #365aff;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+img {
+    width: 300px;
+    height: auto;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid #333;
+}

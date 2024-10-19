@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Image Converter</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div class="container">
+            <h1>Image Converter</h1>
+            <label for="imageUpload">
+                <img
+                    id="inputImage"
+                    alt="Uploaded image"
+                    src=""
+                    onerror="this.onerror=null; this.src='./upload.png'"
+                    style="display: block"
+                    title="Click to upload a file for conversion"
+                />
+                <img
+                    id="outputImage"
+                    alt="Result image"
+                    style="display: none"
+                    title="Click to upload a file for conversion"
+                />
+            </label>
+            <input
+                type="file"
+                id="imageUpload"
+                accept="image/*"
+                style="display: none"
+            />
+            <br />
+            <a id="downloadLink" style="display: none"
+                >Converted image download</a
+            >
+            <button id="convertButton">Convert</button>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
