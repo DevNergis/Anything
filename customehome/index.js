@@ -8,6 +8,8 @@ button = document.getElementById("svg");
 w = window.innerWidth;
 h = window.innerHeight;
 
+nowKey = 1;
+
 const ACCESS_KEY_1 = "n_XM9X3bwgVjq1sdXIE-jwFXSNEnCNgylSqC4wyo7ns";
 const ACCESS_KEY_2 = "P4KAdR6BAyUqswxdKYhriezQhYi5MLXCGHQppn53tVc";
 
@@ -37,7 +39,7 @@ async function getBg(key) {
             return response.json();
         })
         .then((data) => {
-            console.log(data);
+            nowKey = 1;
             localStorage.setItem("bgUrl", data.urls.full);
             newbg.style.backgroundImage = `url(${localStorage.getItem(
                 "bgUrl"
@@ -48,7 +50,15 @@ async function getBg(key) {
         })
         .catch((error) => {
             temp = error.message;
-            console.log(temp);
+            if (temp.split(`', "`)[1].split(`"`)[0] == "Rate Limit exceeded") {
+                if (nowKey == 1) {
+                    getBg(ACCESS_KEY_2);
+                } else {
+                    console.warn(
+                        "Unsplash 의 API 시간당 요청 제한 횟수에 도달했습니다. 잠시 뒤 다시 시도해 주십시오."
+                    );
+                }
+            }
         });
 }
 
