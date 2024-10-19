@@ -33,8 +33,11 @@ async function getBg(key) {
     fetch(
         `https://api.unsplash.com/photos/random?client_id=${key}&query=nature&orientation=landscape`
     )
-        .then((response) => response.json())
+        .then((response) => {
+            return response.json();
+        })
         .then((data) => {
+            console.log(data);
             localStorage.setItem("bgUrl", data.urls.full);
             newbg.style.backgroundImage = `url(${localStorage.getItem(
                 "bgUrl"
@@ -45,9 +48,7 @@ async function getBg(key) {
         })
         .catch((error) => {
             temp = error.message;
-            if (temp.split(`', "`)[1].split(`"`)[0] == "Rate Limit Exceeded") {
-                getBg(ACCESS_KEY_2);
-            }
+            console.log(temp);
         });
 }
 
@@ -69,6 +70,10 @@ input.addEventListener("keydown", (event) => {
         input.blur();
         window.location.href = `https://www.google.com/search?q=${input.value.trim()}`;
     }
+});
+
+input.addEventListener("input", () => {
+    getQueryComplete();
 });
 
 updateTime();
