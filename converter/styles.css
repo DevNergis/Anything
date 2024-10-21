@@ -22,13 +22,33 @@ input[type="file"] {
     margin: 1rem 0;
 }
 
+select {
+    background: #222;
+    color: #eee;
+    border: none;
+    padding: 10px;
+    font-size: 1rem;
+    outline: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.1s;
+
+    &:hover,
+    &:focus {
+        background: #111;
+    }
+}
+
 button {
-    margin-top: 10px;
+    display: block;
+    margin: 0.5rem auto 0.7rem auto;
     transition: 0.1s;
     background-color: #365aff;
     color: #eee;
     border: none;
-    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 10px 30px;
     border-radius: 5px;
 
     &:disabled {
@@ -56,6 +76,10 @@ a {
     &:hover {
         text-decoration: underline;
     }
+}
+
+p {
+    color: #ff5151;
 }
 
 img {

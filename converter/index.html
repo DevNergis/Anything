@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
@@ -28,13 +28,20 @@
             <input
                 type="file"
                 id="imageUpload"
-                accept="image/*"
+                accept="image/png, image/jpg, image/jpeg, image/jfif, image/webp"
                 style="display: none"
             />
             <br />
+            <p id="message"></p>
             <a id="downloadLink" style="display: none"
                 >Converted image download</a
             >
+            <select id="selecter">
+                <option>png</option>
+                <option>jpg</option>
+                <option>jpeg</option>
+                <option>webp</option>
+            </select>
             <button id="convertButton">Convert</button>
         </div>
         <script src="script.js"></script>
