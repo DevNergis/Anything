@@ -19,6 +19,12 @@ for (let i of projects_) {
     i.addEventListener("mousemove", () => {
         showBackgroundModal(i);
     });
+    i.addEventListener("mouseenter", () => {
+        showBackgroundModal(i);
+    });
+    i.addEventListener("click   ", () => {
+        showBackgroundModal(i);
+    });
     i.addEventListener("mouseleave", () => {
         hiddenBackgroundModal(i);
     });

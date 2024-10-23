@@ -1,3 +1,27 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css");
+
+* {
+    font-family: "Pretendard", Pretendard, -apple-system, BlinkMacSystemFont,
+        system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo",
+        "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji",
+        "Segoe UI Symbol", sans-serif;
+    font-weight: 300;
+
+    /* 선택 및 드래그 제한 */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-use-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+
+    color: #eee;
+}
+
 body {
     margin: 0;
     background: #222;
@@ -5,20 +29,59 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: hidden;
 }
 
 h1 {
-    font-size: 2rem;
-    margin: 2rem 0 1rem 0;
+    margin: 2rem 0 0.2rem 0;
+    font-weight: 700;
+    text-align: center;
+}
+
+h6 {
+    font-size: 1.3rem;
+    margin: 0.2rem 0;
+    color: #999;
+    text-align: center;
+}
+
+h4 {
+    margin: 0.6rem 0 2rem 0;
+    font-weight: 300;
+    color: #999;
+    text-align: center;
 }
 
 .projects {
+    padding: 25px;
     box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
-    width: 85vw;
+    width: 90vw;
     gap: 10px;
     justify-content: center;
+    align-items: flex-start;
+    height: 70vh;
+    overflow-x: hidden;
+    align-content: flex-start;
+
+    overflow-x: hidden;
+    &::-webkit-scrollbar {
+        position: absolute;
+        cursor: default;
+        width: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+        cursor: default;
+        height: 10%;
+        border-radius: 10px;
+        background: #444;
+    }
+    &::-webkit-scrollbar-track {
+        cursor: default;
+        background: #1d1d1d;
+        border-radius: 10px;
+    }
 }
 
 .project {
@@ -31,9 +94,16 @@ h1 {
     background: #1d1d1d;
     padding: 2rem;
     border-radius: 10px;
-    border: 1px solid transparent;
+    border: 1px solid #2d2d2d;
+    height: min-content;
+    text-align: left;
 
     transition: 0.3s;
+    outline: 1px solid transparent;
+
+    &:focus {
+        outline: 1px solid #6a85ff;
+    }
 
     &:hover {
         border-color: #365aff;
@@ -46,7 +116,7 @@ h1 {
 
 .title {
     font-size: 1.2rem;
-    font-weight: 600;
+    font-weight: 400;
 }
 
 .desc {
@@ -76,8 +146,7 @@ h1 {
 }
 
 p {
-    position: absolute;
-    bottom: 10px;
+    margin: 0.5rem 0 1rem 0;
     text-align: center;
     color: #999;
 }
