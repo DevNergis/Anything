@@ -25,9 +25,7 @@ function updateTime() {
     date[0].innerText = `${sysdate.getFullYear()}년 ${modifyNumber(
         sysdate.getMonth() + 1
     )}월 ${modifyNumber(sysdate.getDay())}일`;
-    date[1].innerHTML = `${modifyNumber(sysdate.getHours())}:${modifyNumber(
-        sysdate.getMinutes()
-    )}`;
+    date[1].innerHTML = `${modifyNumber(sysdate.getHours())}:${modifyNumber(sysdate.getMinutes())}`;
 }
 
 async function getBg(key) {
@@ -41,9 +39,7 @@ async function getBg(key) {
         .then((data) => {
             nowKey = 1;
             localStorage.setItem("bgUrl", data.urls.full);
-            newbg.style.backgroundImage = `url(${localStorage.getItem(
-                "bgUrl"
-            )})`;
+            newbg.style.backgroundImage = `url(${localStorage.getItem("bgUrl")})`;
             setTimeout(() => {
                 newbg.classList.add("disappear");
             }, 500);
@@ -89,4 +85,4 @@ input.addEventListener("input", () => {
 updateTime();
 getBg(ACCESS_KEY_1);
 
-setInterval(updateTime, 30000);
+setInterval(updateTime, 1000);
