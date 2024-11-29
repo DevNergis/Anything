@@ -2,87 +2,109 @@ date = document.getElementById("sysdate").children; //0 = dateㅣ1 = time
 oldbg = document.getElementById("old"); //bg
 newbg = document.getElementById("new"); //bg
 app = document.getElementById("app");
+bar = document.getElementById("bar");
 search = document.getElementById("search");
-input = document.getElementById("search_");
-button = document.getElementById("svg");
+button = document.getElementById("btn");
+google = document.getElementById("google");
 w = window.innerWidth;
 h = window.innerHeight;
 
 nowKey = 1;
 
+const day = [
+	"일요일",
+	"월요일",
+	"화요일",
+	"수요일",
+	"목요일",
+	"금요일",
+	"토요일",
+];
+
 const ACCESS_KEY_1 = "n_XM9X3bwgVjq1sdXIE-jwFXSNEnCNgylSqC4wyo7ns";
 const ACCESS_KEY_2 = "P4KAdR6BAyUqswxdKYhriezQhYi5MLXCGHQppn53tVc";
 
-function modifyNumber(time) {
-    if (parseInt(time) < 10) {
-        return "0" + time;
-    } else return time;
-}
-
 function updateTime() {
-    sysdate = new Date();
+	sysdate = new Date();
 
-    date[0].innerText = `${sysdate.getFullYear()}년 ${modifyNumber(
-        sysdate.getMonth() + 1
-    )}월 ${modifyNumber(sysdate.getDay())}일`;
-    date[1].innerHTML = `${modifyNumber(sysdate.getHours())}:${modifyNumber(sysdate.getMinutes())}`;
+	date[0].innerText = `${sysdate.getMonth() + 1}월 ${sysdate.getDate()}일 ${
+		day[sysdate.getDay()]
+	}`;
+	date[1].innerHTML = `${sysdate.getHours()}:${sysdate
+		.getMinutes()
+		.toString()
+		.padStart(2, "0")}`;
 }
 
-async function getBg(key) {
-    oldbg.style.backgroundImage = `url(${localStorage.getItem("bgUrl")})`;
-    fetch(
-        `https://api.unsplash.com/photos/random?client_id=${key}&query=nature&orientation=landscape`
-    )
-        .then((response) => {
-            return response.json();
-        })
-        .then((data) => {
-            nowKey = 1;
-            localStorage.setItem("bgUrl", data.urls.full);
-            newbg.style.backgroundImage = `url(${localStorage.getItem("bgUrl")})`;
-            setTimeout(() => {
-                newbg.classList.add("disappear");
-            }, 500);
-        })
-        .catch((error) => {
-            temp = error.message;
-            if (temp.split(`', "`)[1].split(`"`)[0] == "Rate Limit exceeded") {
-                if (nowKey == 1) {
-                    getBg(ACCESS_KEY_2);
-                } else {
-                    console.warn(
-                        "Unsplash 의 API 시간당 요청 제한 횟수에 도달했습니다. 잠시 뒤 다시 시도해 주십시오."
-                    );
-                }
-            }
-        });
-}
+async function getBg(key, keynum = 1) {
+	nowKey = keynum;
+	oldbg.style.backgroundImage = `url(${localStorage.getItem("bgUrl")})`;
+	fetch(
+		`https://api.unsplash.com/photos/random?client_id=${key}&query=korea&orientation=landscape`
+	)
+		.then((response) => {
+			return response.json();
+		})
+		.then((data) => {
+			localStorage.setItem(
+				"bgUrl",
+				data.urls.raw + `&w=${w}&h=${h}&dpr=2&auto=format&fit=crop`
+			);
 
-// run
-window.addEventListener("DOMContentLoaded", () => {
-    setTimeout(() => {
-        app.classList.add("show");
-    }, 1);
-});
+			newbg.style.backgroundImage = `url(${localStorage.getItem(
+				"bgUrl"
+			)})`;
+
+			const img = new Image();
+			img.src = localStorage.getItem("bgUrl");
+
+			img.onload = () => {
+				newbg.style.backgroundImage = `url(${localStorage.getItem(
+					"bgUrl"
+				)})`;
+				newbg.style.opacity = 1;
+			};
+		})
+		.catch((error) => {
+			temp = error.message;
+			if (temp.split(`', "`)[1].split(`"`)[0] == "Rate Limit exceeded") {
+				if (nowKey == 1) {
+					getBg(ACCESS_KEY_2, 2);
+				} else {
+					console.warn(
+						"Unsplash 의 API 시간당 요청 제한 횟수에 도달했습니다. 잠시 뒤 다시 시도해 주십시오."
+					);
+				}
+			}
+		});
+}
 
 button.addEventListener("click", () => {
-    if (input.value.trim().length > 0) {
-        window.location.href = `https://www.google.com/search?q=${input.value.trim()}`;
-    }
+	if (search.value.trim().length > 0) {
+		window.location.href = `https://www.google.com/search?q=${search.value.trim()}`;
+	}
 });
 
-input.addEventListener("keydown", (event) => {
-    if (event.code == "Enter" && input.value.trim().length > 0) {
-        input.blur();
-        window.location.href = `https://www.google.com/search?q=${input.value.trim()}`;
-    }
+google.addEventListener("click", () => {
+	window.location.href = `https://www.google.com/`;
 });
 
-input.addEventListener("input", () => {
-    getQueryComplete();
+search.addEventListener("keydown", (event) => {
+	if (event.code == "Enter" && search.value.trim().length > 0) {
+		search.blur();
+		window.location.href = `https://www.google.com/search?q=${search.value.trim()}`;
+	}
+});
+
+search.addEventListener("input", () => {
+	if (search.value.length > 0) {
+		bar.style.background = "rgba(255,255,255,0.8)";
+	} else {
+		bar.style.background = "";
+	}
 });
 
 updateTime();
-getBg(ACCESS_KEY_1);
+getBg(ACCESS_KEY_1, 1);
 
-setInterval(updateTime, 1000);
+setInterval(updateTime, 500);

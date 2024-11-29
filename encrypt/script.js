@@ -53,18 +53,14 @@ function encryption(input) {
     if (isWellFormed(input)) {
         base64Encode = toBase64(new TextEncoder().encode(input));
     } else {
-        error(
-            "The input string is incorrect or doesn't meet the required format"
-        );
+        error("The input string is incorrect or doesn't meet the required format");
         return;
     }
 
     function makeNewEncryptString() {
         newEncryptString =
-            newEncryptString.slice(
-                newEncryptString.length / 2,
-                newEncryptString.length
-            ) + newEncryptString.slice(0, newEncryptString.length / 2);
+            newEncryptString.slice(newEncryptString.length / 2, newEncryptString.length) +
+            newEncryptString.slice(0, newEncryptString.length / 2);
     }
 
     newEncryptString = encryptString;
