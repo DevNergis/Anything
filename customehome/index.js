@@ -8,6 +8,9 @@ button = document.getElementById("btn");
 google = document.getElementById("google");
 w = window.innerWidth;
 h = window.innerHeight;
+resizeTimer = 0;
+
+rawDataUrl = "";
 
 nowKey = 1;
 
@@ -46,24 +49,9 @@ async function getBg(key, keynum = 1) {
 			return response.json();
 		})
 		.then((data) => {
-			localStorage.setItem(
-				"bgUrl",
-				data.urls.raw + `&w=${w}&h=${h}&dpr=2&auto=format&fit=crop`
-			);
+			localStorage.setItem("rawBgUrl", data.urls.raw);
 
-			newbg.style.backgroundImage = `url(${localStorage.getItem(
-				"bgUrl"
-			)})`;
-
-			const img = new Image();
-			img.src = localStorage.getItem("bgUrl");
-
-			img.onload = () => {
-				newbg.style.backgroundImage = `url(${localStorage.getItem(
-					"bgUrl"
-				)})`;
-				newbg.style.opacity = 1;
-			};
+			setImage(localStorage.getItem("rawBgUrl"));
 		})
 		.catch((error) => {
 			temp = error.message;
@@ -77,6 +65,24 @@ async function getBg(key, keynum = 1) {
 				}
 			}
 		});
+}
+
+async function setImage(data) {
+	newbg.style.opacity = 0;
+	localStorage.setItem(
+		"bgUrl",
+		data + `&w=${w}&h=${h}&dpr=2&auto=format&fit=crop`
+	);
+
+	newbg.style.backgroundImage = `url(${localStorage.getItem("bgUrl")})`;
+
+	const img = new Image();
+	img.src = localStorage.getItem("bgUrl");
+
+	img.onload = () => {
+		newbg.style.backgroundImage = `url(${localStorage.getItem("bgUrl")})`;
+		newbg.style.opacity = 1;
+	};
 }
 
 button.addEventListener("click", () => {
@@ -102,6 +108,18 @@ search.addEventListener("input", () => {
 	} else {
 		bar.style.background = "";
 	}
+});
+
+window.addEventListener("resize", () => {
+	clearTimeout(resizeTimer);
+
+	resizeTimer = setTimeout(() => {
+		console.log("Resize ended");
+		oldbg.style.backgroundImage = `url(${localStorage.getItem("bgUrl")})`;
+		w = window.innerWidth;
+		h = window.innerHeight;
+		setImage(localStorage.getItem("rawBgUrl"));
+	}, 500);
 });
 
 updateTime();
