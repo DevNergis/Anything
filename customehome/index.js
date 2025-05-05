@@ -92,13 +92,13 @@ button.addEventListener("click", () => {
 });
 
 google.addEventListener("click", () => {
-	window.location.href = `https://www.google.com/`;
+	window.location.href = `https://duckduckgo.com/`;
 });
 
 search.addEventListener("keydown", (event) => {
 	if (event.code == "Enter" && search.value.trim().length > 0) {
 		search.blur();
-		window.location.href = `https://www.google.com/search?q=${search.value.trim()}`;
+		window.location.href = `https://duckduckgo.com/?q=${search.value.trim()}`;
 	}
 });
 
